@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome <% %></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<style>
+		.header1{
+			text-align: center;
+		}
+		.mypost{
+			width: 550px;
+			padding-left: 20px;
+			float: left;
+		}
+		.myorder{
+			width: 600px;
+			padding-left: 80px;
+			float: left;
+		}
+	</style>
+</head>
+<body>
+	<br>
+	<div class="header1">
+		<a href="/user/addbook">Add Post</a> |
+		<a href="/user/profile">My Profile</a> |
+		<a href="/logout">Logout</a>
+	</div>
+<br>
+	<div class="mypost">
+		<h2 style="text-align: center;">My Post</h2>
+		<table border="1" class="table table-striped"> 
+			<tr>
+				<th>ID</th>
+				<th>Book Name</th>
+				<th>Author Name</th>
+				<th>Category No</th>
+				<th>Price</th>
+			</tr>
+			<% for(var i=0; i< book.length; i++){ %>
+				<tr>
+					<td><%= book[i].id %></td>
+					<td><%= book[i].bname %></td>
+					<td><%= book[i].aname %></td>
+					<td><%= book[i].category %></td>
+					<td><%= book[i].price %></td>
+				</tr>
+			<% } %>
+		</table>
+	</div>
+	<div class="myorder">
+			<h2 style="text-align: center;">My Order</h2>
+			<table border="1" class="table table-striped">
+					<th>ID</th>
+					<th>Book Name</th>
+					<th>Author Name</th>
+					<th>Category No</th>
+					<th>Price</th>
+					<th>Author Email</th>
+				</tr>
+			</table>
+		</div>
+</body>
+</html>
