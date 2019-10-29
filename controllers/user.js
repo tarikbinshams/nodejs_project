@@ -81,26 +81,29 @@ router.post('/addbook', function(req, res){
 
 router.get('/edit/:id', function(req, res){
 
-	userModel.getById(req.params.id, function(results){
-		res.render('user/edit', {user: results[0]});		
+	//res.render('user/edit');
+	bookModel.getById(req.params.id, function(results){
+		console.log(results);
+		res.render('user/edit', {book: results});		
 	});
 
 });
 
 router.post('/edit/:id', function(req, res){
-	
-	var user = {
-		username: req.body.username,
-		password: req.body.password,
-		id: req.params.id
+	var id = req.params.id;
+	var book = {
+		id: req.params.id,
+		bname: req.body.bname,
+		aname: req.body.aname,
+		category: req.body.category,
+		price: req.body.price
 	};
 
-	userModel.update(user, function(status){
-
+	bookModel.update(book, function(status){
 		if(status){
-			res.redirect('/user/userlist');
+			res.redirect('/user');
 		}else{
-			res.redirect('/user/adduser');
+			res.redirect('/user/edit');
 		}
 	});
 });

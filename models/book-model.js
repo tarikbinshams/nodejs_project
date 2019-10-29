@@ -4,7 +4,7 @@ module.exports={
 
 	getById: function(id, callback){
 
-		var sql = "select * from employeer where id=?";
+		var sql = "select * from book where id=?";
 		db.getResults(sql, [id], function(result){
 
 			//console.log(result);
@@ -56,10 +56,15 @@ module.exports={
 			callback(status);
 		});
 	},
-
-	update : function(user, callback){
-		var sql = "update user set name=?, phone=?, password=? where email=?";		
-			db.execute(sql, [user.name, user.phone, user.password, user.email], function(status){
+	insertOrder : function(book, callback){
+		var sql = "insert into order values('', ?, ?, ?, ?, ?, ?)";
+		db.execute(sql, [book.id, book.bname, book.aname, book.category, book.price, book.email], function(status){
+			callback(status);
+		});
+	},
+	update : function(book, callback){
+		var sql = "update book set bname=?, aname=?, category=?, price=? where id=?";		
+			db.execute(sql, [book.bname, book.aname, book.category, book.price, book.id], function(status){
 				callback(status);
 			});
 		

@@ -5,19 +5,23 @@
     </head>  
 	
    <style>
- *{
-	margin: 0; 
-	padding: 0;
-}
+	*{
+		margin: 0; 
+		padding: 0;
+	}
 
-body{
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background: url(img1.jpg) no-repeat;
-  background-size: cover;
-}
-.form-design{ 
+	body{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	background: url(img1.jpg) no-repeat;
+	background-size: cover;
+	}
+	.header1{
+				padding-left: 540px;
+				padding-top: 70px;
+			}
+	.form-design{ 
 		width: 320px; background: #3e3d3d; 
 		padding: 40px 20px; 
 		box-sizing: border-box; 
@@ -25,13 +29,13 @@ body{
 		left: 50%; 
 		top: 50%; 
 		transform: translate(-50%, -50%);
-}
-h1{
-	text-align: center; 
-	color: #fff; 
-	font-weight: normal; 
-	margin-bottom: 20px;
-}
+	}
+	h1{
+		text-align: center; 
+		color: #fff; 
+		font-weight: normal; 
+		margin-bottom: 20px;
+	}
         
 input{
 	width: 100%; 
@@ -71,12 +75,15 @@ a{
 }
     </style>
     <body>
+		<div class="header1">
+			<h3><a href="/home">Home</a></h3>
+		</div>
         <div class="form-design">
             <form method="POST">
                 <h1>Log in</h1>  
                 <input type="text" placeholder="Email" name="email">
                 <input type="password" placeholder="Password" name="password">
-				<input type="submit" value="Sign Up" name="submit">
+				<input type="submit" value="Sign in" name="submit">
 				<a href="/registration">Registration here</a>
             </form>
         </div>

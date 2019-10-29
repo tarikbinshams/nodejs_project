@@ -4,7 +4,14 @@ var userModel = require('./../models/user-model');
 var router = express.Router();
 
 router.get('/', function(req, res){
-	res.render('login/index');
+	if(req.session.email != null){
+		console.log(req.session.email);
+		res.redirect('/user');
+	}else{
+		console.log(req.session.email);
+		res.render('login/index');
+	}
+	
 });
 
 router.post('/', function(req, res){

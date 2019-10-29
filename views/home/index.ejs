@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+    .top-nav-bar{
+        height: 55px;
+        top: 0;
+        position: sticky;
+        background: #fff;
+        margin-bottom: 20px;
+        border-bottom: 3px  solid rgb(43, 199, 90);
+        z-index: 2;
+    }
+
+    .logo{
+        height: 35px;
+        margin: 5px 10px;
+    }
+
+    .form-control{
+        
+        margin-top: 9px;
+        margin-left: 50px;
+        border: 1px solid rgb(43, 199, 90) !important;
+        border-top-left-radius: 20px !important;
+        border-bottom-left-radius: 20px !important;
+        border-top-right-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+        box-shadow: none !important;
+    }
+    .input-group-text{
+        background: rgb(43, 199, 90) !important;
+        border:  1px solid rgb(43, 199, 90);
+        margin: 8.5px 8px 0px 0;
+        border-top-left-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+        border-top-right-radius: 20px !important;
+        border-bottom-right-radius: 20px !important;
+        cursor: pointer;
+    }
+
+    .search-box{
+        display: inline-flex;
+        width: 70%;
+        padding-left: 200px;
+
+    }
+
+    .fa-search{
+        color: white;
+    }
+    .menu-bar{
+        width: 30%;
+        height: 57px;
+        float: right;
+    }
+    .menu-bar ul{
+        display: inline-flex;
+        float: right;
+    }
+    .menu-bar ul li{
+        border-left: 1px solid #fff;
+        list-style-type: none;
+        padding: 15px 35px;
+        text-align: center;
+        background-color: rgb(43, 199, 90);
+        cursor: pointer;
+    }
+    .menu-bar ul li a{
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        text-decoration: none;
+    }
+    .fa-shopping-basket{
+        margin-right: 5px;
+    }
+            
+        </style>
+    </head>  
+    <body>
+        <div class="top-nav-bar">
+            <div class="search-box">
+                <img src="logo.jpg" alt="" class="logo">
+                <input type="text" name="search" class="form-control">
+                <span class="input-group-text"><i class="fa fa-search"></i></span>
+            </div>
+            <div class="menu-bar">
+                <ul>
+                    <li><a href="/registration">Sign Up</a></li>
+                    <li><a href="/login">Log In</a></li>
+                </ul>
+            </div>
+        </div>
+    	<div class="container">
+    		<div class="row">
+    			<% for(var i=0; i< book.length; i++){ %>
+				<div class="col-md-3">
+        			<div style="border:3px solid #478b47; background-color:whitesmoke; margin:10px; border-radius:5px; padding:10px;" align="center">
+                        Name: <h7 class="text-danger"> <%= book[i].bname %></h7></br>
+						Author Name: <h7 class="text-danger"><%= book[i].aname %></h7></br>
+                        Price:  <h7 class="text-danger"><%= book[i].price %></h7></br>
+                        <a href="/home/buy/<%= book[i].id %>">Buy</a>
+        			</div>
+        		</div>
+			<% } %>
+        
+        </div>
+    </div>
+
+    </body>
+</html>

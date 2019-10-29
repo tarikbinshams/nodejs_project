@@ -1,44 +1,69 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>userlist</title>
-</head>
-<body>
-	<h1>Edit user</h1>
+    <head>
+        <title>Sign Up</title>
+    </head>
+    
+    <style>
+    
+    *{margin: 0; padding: 0;}
+        body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-size: cover;
+}
+        
+.form-wrap{ width: 320px; height: 400px; background: #3e3d3d; padding: 40px 20px; box-sizing: border-box; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);}
+h1{text-align: center; color: #fff; font-weight: normal; margin-bottom: 20px;}
+        
+input{width: 100%; background: none; border: 1px solid #fff; border-radius: 3px; padding: 6px 15px; box-sizing: border-box; margin-bottom: 20px; font-size: 16px; color: #fff;}
 
-	<a href="/user/userlist">Back</a> |
-	<a href="/logout">logout</a>
+select{width: 100%; background: black; border: 1px solid #fff; border-radius: 3px; padding: 6px 15px; box-sizing: border-box; margin-bottom: 20px; font-size: 16px; color: #fff;}
+        
+input[type="submit"]{ background: #bac675; border: 0; cursor: pointer; color: #3e3d3d;}
+input[type="submit"]:hover{ background: #a4b15c; transition: .6s;}
+        
+        ::placeholder{color: #fff;}
+p{
+    color: white;
+    font-size: 12px;
+}
+p a{
+    color: white;
+}
+a{
+    padding-left: 110px ;
+    color:  #616b2a
+}
+    
+    </style>
 
-<br><br>
+    <body>
+        <div class="form-wrap">
+            <form method="post">
+                <h1>Modify Book</h1>
+                <input type="text" value="<%=book.bname%>" name="bname">
+                <input type="text" value="<%=book.aname%>" name="aname">
+                <select name="category">
+                    <option value="programming">Programming</option>
+                    <option value="math">Math</option>
+                    <option value="science">Science Fiction</option>
+                    </option>
+                </select>
+                <input type="text" value="<%=book.price%>" name="price">
+                <input type="submit" value="Modify" name="submit">
 
-<form method="post">
-	<table border="0">
-	<tr>
-			<td>Employer Name</td>
-			<td><input type="text" name="ename"><%=user.ename%>"></td>
-		</tr>
-		<tr>
-			<td>Company Name</td>
-			<td><input type="text" name="cname"><%=user.cname%>"></td>
-		</tr>
-		<tr>
-			<td>Contact No</td>
-			<td><input type="text" name="contactno"><%=user.contactno%>"></td>
-		</tr>
-		<tr>
-		<tr>
-			<td>Username</td>
-			<td><input type="text" name="username" value="<%=user.username%>"></td>
-		</tr>
-		<tr>
-			<td>PASSWORD</td>
-			<td><input type="password" name="password" value="<%=user.password%>"></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><input type="submit" name="submit" value="Save"></td>
-		</tr>
-	</table>
-</form>
-</body>
+                <a href="/user">Back</a>
+                
+            </form>
+        
+        </div>
+    
+    
+    
+    </body>
+
+
+
 </html>
