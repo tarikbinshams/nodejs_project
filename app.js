@@ -1,12 +1,12 @@
 //DECLARATION
 var express  	= require('express');
 var ejs  		= require('ejs');
+var bodyParse  	= require('body-parser');
 var exSession  	= require('express-session');
 var home  		= require('./controllers/home');
 var user  		= require('./controllers/user');
 var login  		= require('./controllers/login');
 var registration= require('./controllers/registration');
-var bodyParse  	= require('body-parser');
 var logout  	= require('./controllers/logout');
 var app 		= express();
 
@@ -14,6 +14,7 @@ var app 		= express();
 app.set('view engine', 'ejs');
 
 //MIDDLEWARE
+app.use(express.static('public'));
 app.use(bodyParse.urlencoded({extended:false}));
 app.use(exSession({secret:"i love js", saveUninitialized:true, resave:false}));
 app.use('/home', home);

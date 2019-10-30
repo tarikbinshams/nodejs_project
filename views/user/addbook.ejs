@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Sign Up</title>
+        <title>Add Book</title>
     </head>
     
     <style>
@@ -14,12 +14,12 @@
   background-size: cover;
 }
         
-.form-wrap{ width: 320px; height: 400px; background: #3e3d3d; padding: 40px 20px; box-sizing: border-box; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);}
+.form-wrap{ width: 320px; height: 455px; background: #3e3d3d; padding: 30px 20px; box-sizing: border-box; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);}
 h1{text-align: center; color: #fff; font-weight: normal; margin-bottom: 20px;}
         
 input{width: 100%; background: none; border: 1px solid #fff; border-radius: 3px; padding: 6px 15px; box-sizing: border-box; margin-bottom: 20px; font-size: 16px; color: #fff;}
 
-select{width: 100%; background: black; border: 1px solid #fff; border-radius: 3px; padding: 6px 15px; box-sizing: border-box; margin-bottom: 20px; font-size: 16px; color: #fff;}
+select{width: 100%; background:  #3e3d3d; border: 1px solid #fff; border-radius: 3px; padding: 6px 15px; box-sizing: border-box; margin-bottom: 20px; font-size: 16px; color: #fff;}
         
 input[type="submit"]{ background: #bac675; border: 0; cursor: pointer; color: #3e3d3d;}
 input[type="submit"]:hover{ background: #a4b15c; transition: .6s;}
@@ -33,7 +33,7 @@ p a{
     color: white;
 }
 a{
-    padding-left: 110px ;
+    padding-left: 120px ;
     color:  #616b2a
 }
     
@@ -52,6 +52,7 @@ a{
                     </option>
                 </select>
                 <input type="text" placeholder="Price" name="price">
+                <input type="file" placeholder="Upload image" name="image">
                 <input type="submit" value="Add" name="submit">
 
                 <a href="/user">Back</a>

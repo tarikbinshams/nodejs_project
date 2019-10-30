@@ -50,14 +50,46 @@ module.exports={
 			}
 		});
 	},
-	insertBook : function(user, callback){
+	getAllandEmail : function(email, callback){
+		var sql = "select * from book where email=?";
+		db.getResults(sql, [email], function(result){
+			if(result.length > 0 ){
+				callback(result);
+			}else{
+				callback([]);
+			}
+		});
+		var sql = "select * from book";
+
+		db.getResults(sql, [], function(results){
+
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	insertBook : function(book, callback){
 		var sql = "insert into book values('', ?, ?, ?, ?, ?)";
-		db.execute(sql, [user.bname, user.aname, user.category, user.price, user.email], function(status){
+		db.execute(sql, [book.bname, book.aname, book.category, book.price, book.email], function(status){
+			callback(status);
+		});
+	},
+	insertDonateBook : function(book, callback){
+		var sql = "insert into donatebook values('', ?, ?, ?, ?)";
+		db.execute(sql, [book.bname, book.aname, book.category, book.email], function(status){
+			callback(status);
+		});
+	},
+	insertRequestBook : function(book, callback){
+		var sql = "insert into requestbook values('', ?, ?, ?, ?)";
+		db.execute(sql, [book.bname, book.aname, book.category, book.email], function(status){
 			callback(status);
 		});
 	},
 	insertOrder : function(book, callback){
-		var sql = "insert into order values('', ?, ?, ?, ?, ?, ?)";
+		var sql = "insert into bookorder values('', ?, ?, ?, ?, ?, ?)";
 		db.execute(sql, [book.id, book.bname, book.aname, book.category, book.price, book.email], function(status){
 			callback(status);
 		});

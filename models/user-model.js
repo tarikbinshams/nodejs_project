@@ -4,7 +4,7 @@ module.exports={
 
 	getById: function(id, callback){
 
-		var sql = "select * from employeer where id=?";
+		var sql = "select * from user where id=?";
 		db.getResults(sql, [id], function(result){
 
 			//console.log(result);
@@ -19,8 +19,6 @@ module.exports={
 
 		var sql = "select * from user where email=?";
 		db.getResults(sql, [email], function(result){
-
-			console.log(result);
 			if(result.length > 0 ){
 				callback(result[0]);
 			}else{

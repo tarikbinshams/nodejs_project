@@ -1,7 +1,10 @@
 var express = require('express');
 var userModel = require('./../models/user-model');
 var bookModel = require('./../models/book-model');
+//var multer = require('multer');
+//var upload = multer({dest: 'public/uploads/'});
 var router = express.Router();
+
 
 router.get('*', function(req, res, next){
 
@@ -58,23 +61,46 @@ router.get('/addbook', function(req, res){
 	res.render('user/addbook');
 });
 
-router.post('/addbook', function(req, res){
+router.post('/addbook', function(req, res, next){
+	//res.send(req.files);
 	var cat = req.body.category;
-	var user = {
+	var book = {
 		bname: req.body.bname,
 		aname: req.body.aname,
 		category: cat,
 		price: req.body.price,
 		email: req.session.email
 	};
-	console.log(user.email);
-	bookModel.insertBook(user, function(status){
+	console.log(book.email);
+	bookModel.insertBook(book, function(status){
 		if(status){
-			//res.send("Inserted");
 			res.redirect('/user');
 		}else{
 			res.send("Not Inserted");
 			//res.redirect('/user/addbook');
+		}
+	});
+});
+
+router.get('/donatebook', function(req, res){
+	res.render('user/donatebook');
+});
+
+router.post('/donatebook', function(req, res, next){
+	//res.send(req.files);
+	var cat = req.body.category;
+	var book = {
+		bname: req.body.bname,
+		aname: req.body.aname,
+		category: cat,
+		email: req.session.email
+	};
+	console.log(user.email);
+	bookModel.insertDonateBook(book, function(status){
+		if(status){
+			res.redirect('/user');
+		}else{
+			res.redirect('/user/donatebook');
 		}
 	});
 });
