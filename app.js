@@ -7,6 +7,7 @@ var home  		= require('./controllers/home');
 var user  		= require('./controllers/user');
 var login  		= require('./controllers/login');
 var registration= require('./controllers/registration');
+var admin		= require('./controllers/admin');
 var logout  	= require('./controllers/logout');
 var app 		= express();
 
@@ -21,6 +22,7 @@ app.use('/home', home);
 app.use('/user', user);
 app.use('/login', login);
 app.use('/registration', registration);
+app.use('/admin', admin);
 app.use('/logout', logout);
 
 //ROUTING

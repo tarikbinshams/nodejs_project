@@ -38,6 +38,18 @@ module.exports={
 			}
 		});
 	},
+	validateAdmin : function(user, callback){
+		var sql = "select * from admin where username=? and password=?";
+
+		db.getResults(sql, [user.email, user.password], function(result){
+
+			if(result.length > 0 ) {
+				callback(true);
+			}else{
+				callback(false);
+			}
+		});
+	},
 	getAll : function(callback){
 		var sql = "select * from employeer";
 
@@ -56,7 +68,12 @@ module.exports={
 			callback(status);
 		});
 	},
-
+	insertAdmin : function(user, callback){
+		var sql = "insert into admin values('', ?, ?)";
+		db.execute(sql, [user.username, user.password], function(status){
+			callback(status);
+		});
+	},
 	update : function(user, callback){
 		var sql = "update user set name=?, phone=?, password=? where email=?";		
 			db.execute(sql, [user.name, user.phone, user.password, user.email], function(status){

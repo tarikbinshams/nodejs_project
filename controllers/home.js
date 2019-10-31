@@ -27,27 +27,24 @@ router.get('/', function(req, res){
 			});	
 		});  */
 
-	}
-	
-	
+	}	
 });
 
 router.post('/', function(req, res){
 	var search = req.body.search;
+	var email = req.session.email;
 	if(search == ""){
 		res.redirect('/home');
 	}else{
 		if(req.session.email == null){
-			console.log(search);
-			bookModel.getAll(function(results){
+			bookModel.getSearch(search, function(results){
 				var result = {
 					name: "Log in"
 				}
 				res.render('home/search',{book: results, user: result});
 			});
 		}else{
-			console.log(search);
-			bookModel.getAll(function(results){
+			bookModel.getSearchByEmail(search, email, function(results){
 				var result = {
 					name: "Welcome"
 				}

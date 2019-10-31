@@ -48,6 +48,26 @@ module.exports={
 			}
 		});
 	},
+	getSearch : function(search, callback){
+		var sql = "select * from book where bname=? or aname=? or category=?";
+		db.getResults(sql, [search, search, search], function(results){
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	getSearchByEmail : function(search, email, callback){
+		var sql = "select * from book where (bname=? or aname=? or category=?) and email!=?";
+		db.getResults(sql, [search, search, search, email], function(results){
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
 	getAll : function(callback){
 		var sql = "select * from book";
 
@@ -60,6 +80,43 @@ module.exports={
 			}
 		});
 	},
+	getAllOrder : function(callback){
+		var sql = "select * from bookorder";
+
+		db.getResults(sql, [], function(results){
+
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	getAllDonate : function(callback){
+		var sql = "select * from donatebook";
+
+		db.getResults(sql, [], function(results){
+
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	getAllRequest : function(callback){
+		var sql = "select * from requestbook";
+
+		db.getResults(sql, [], function(results){
+
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	
 	getAllByEmail : function(email, callback){
 		var sql = "select * from book where email !=?";
 
