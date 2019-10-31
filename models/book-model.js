@@ -26,6 +26,16 @@ module.exports={
 			}
 		});
 	},
+	getByEmailUser : function(email, callback){
+		var sql = "select * from user where email=?";
+		db.getResults(sql, [email], function(result){
+			if(result.length > 0 ){
+				callback(result);
+			}else{
+				callback([]);
+			}
+		});
+	},
 	validate: function(user, callback){
 		var sql = "select * from user where email=? and password=?";
 
@@ -42,6 +52,30 @@ module.exports={
 		var sql = "select * from book";
 
 		db.getResults(sql, [], function(results){
+
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	getAllByEmail : function(email, callback){
+		var sql = "select * from book where email !=?";
+
+		db.getResults(sql, [email], function(results){
+
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	getOrderByEmail : function(email, callback){
+		var sql = "select * from bookorder where bemail=?";
+
+		db.getResults(sql, [email], function(results){
 
 			if(results.length > 0 ) {
 				callback(results);
@@ -89,8 +123,8 @@ module.exports={
 		});
 	},
 	insertOrder : function(book, callback){
-		var sql = "insert into bookorder values('', ?, ?, ?, ?, ?, ?)";
-		db.execute(sql, [book.id, book.bname, book.aname, book.category, book.price, book.email], function(status){
+		var sql = "insert into bookorder values('', ?, ?, ?, ?, ?, ?, ?)";
+		db.execute(sql, [book.id, book.bname, book.aname, book.category, book.price, book.bemail, book.semail], function(status){
 			callback(status);
 		});
 	},

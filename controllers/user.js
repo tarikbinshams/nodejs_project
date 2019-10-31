@@ -1,10 +1,10 @@
 var express = require('express');
 var userModel = require('./../models/user-model');
 var bookModel = require('./../models/book-model');
+//var sessionstorage = require('sessionstorage');
 //var multer = require('multer');
 //var upload = multer({dest: 'public/uploads/'});
 var router = express.Router();
-
 
 router.get('*', function(req, res, next){
 
@@ -19,14 +19,17 @@ router.get('/', function(req, res){
 	if(req.session.email != null){
 		var email = req.session.email;
 		bookModel.getByEmail(email, function(results){
-			//console.log(results);
-			res.render('user/index', {book: results});
-		});	
+			bookModel.getOrderByEmail(email, function(results1){
+				res.render('user/index', {book: results, order: results1});
+			}); 
+		});
 	}else{
 		res.redirect('/login');
 	}
+	
 			
 });
+
 
 router.get('/profile', function(req, res){
 	var user = req.session.email;
@@ -71,7 +74,7 @@ router.post('/addbook', function(req, res, next){
 		price: req.body.price,
 		email: req.session.email
 	};
-	console.log(book.email);
+	//console.log(book.email);
 	bookModel.insertBook(book, function(status){
 		if(status){
 			res.redirect('/user');
@@ -95,7 +98,7 @@ router.post('/donatebook', function(req, res, next){
 		category: cat,
 		email: req.session.email
 	};
-	console.log(user.email);
+	//console.log(user.email);
 	bookModel.insertDonateBook(book, function(status){
 		if(status){
 			res.redirect('/user');
@@ -109,7 +112,6 @@ router.get('/edit/:id', function(req, res){
 
 	//res.render('user/edit');
 	bookModel.getById(req.params.id, function(results){
-		console.log(results);
 		res.render('user/edit', {book: results});		
 	});
 
@@ -137,7 +139,6 @@ router.post('/edit/:id', function(req, res){
 router.get('/details/:id', function(req, res){
 
 	userModel.getById(req.params.id, function(result){
-		console.log(result);
 		res.render('user/details', {user: result});
 	});
 });

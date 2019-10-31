@@ -34,7 +34,7 @@
 		<h2 style="text-align: center;">My Post</h2>
 		<table border="1" class="table table-striped"> 
 			<tr>
-				<th>ID</th>
+				<th>Book ID</th>
 				<th>Book Name</th>
 				<th>Author Name</th>
 				<th>Category No</th>
@@ -56,13 +56,23 @@
 	<div class="myorder">
 			<h2 style="text-align: center;">My Order</h2>
 			<table border="1" class="table table-striped">
-					<th>ID</th>
+					<th>Order ID</th>
 					<th>Book Name</th>
 					<th>Author Name</th>
-					<th>Category No</th>
+					<th>Category</th>
 					<th>Price</th>
-					<th>Author Email</th>
+					<th>Seller Email</th>
 				</tr>
+				<% for(var i=0; i< order.length; i++){ %>
+					<tr>
+						<td><%= order[i].id %></td>
+						<td><%= order[i].bname %></td>
+						<td><%= order[i].aname %></td>
+						<td><%= order[i].category %></td>
+						<td><%= order[i].price %></td>
+						<td><%= order[i].semail %></td>
+					</tr>
+				<% } %>
 			</table>
 		</div>
 </body>

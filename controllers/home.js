@@ -1,4 +1,3 @@
-"use strict";
 var express = require('express');
 var bookModel = require('./../models/book-model');
 var userModel = require('./../models/user-model');
@@ -14,17 +13,19 @@ router.get('/', function(req, res){
 			res.render('home/index',{book: results, user: result});
 		});
 	}else{
-		bookModel.getAll(function(results){
+		var email = req.session.email;
+		bookModel.getAllByEmail(email, function(results){
 			var result = {
 				name: "Welcome"
 			}
 			res.render('home/index',{book: results, user: result});
 		});
-		/* var email = req.session.email;
-		bookModel.getAllandEmail(email, function(results){
-			console.log(results[1]);
-			res.render('home/index',{book: results[1], user: results[0]});
-		}); */
+			/* bookModel.getAllByEmail(email, function(results){
+				bookModel.getByEmailUser(email, function(result1){
+					console.log(result1);
+				res.render('home/index',{book: results, user: result1});
+			});	
+		});  */
 
 	}
 	
@@ -34,10 +35,10 @@ router.get('/', function(req, res){
 router.post('/', function(req, res){
 	var search = req.body.search;
 	if(search == ""){
-		console.log(search);
 		res.redirect('/home');
 	}else{
 		if(req.session.email == null){
+			console.log(search);
 			bookModel.getAll(function(results){
 				var result = {
 					name: "Log in"
@@ -45,6 +46,7 @@ router.post('/', function(req, res){
 				res.render('home/search',{book: results, user: result});
 			});
 		}else{
+			console.log(search);
 			bookModel.getAll(function(results){
 				var result = {
 					name: "Welcome"
@@ -60,7 +62,7 @@ router.get('/buy/:id', function(req, res){
 
 	//res.render('user/edit');
 	bookModel.getById(req.params.id, function(results){
-		//console.log(results);
+		//console.log(results.email);
 		res.render('home/buy', {book: results});		
 	});
 
@@ -71,14 +73,15 @@ router.post('/buy/:id', function(req, res){
 		res.send("Please login first");
 	}else{
 		//console.log(req.session.email);
-		var id = req.params.id;
+		//var id = req.params.id;
 		var book = {
 			id: req.params.id,
 			bname: req.body.bname,
 			aname: req.body.aname,
 			category: req.body.category,
-			price: req.body.price,
-			email: req.session.email
+			price: req.body.total,
+			semail: req.body.semail,
+			bemail: req.session.email
 		};
 		bookModel.insertOrder(book, function(status){
 			if(status){
