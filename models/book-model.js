@@ -15,7 +15,18 @@ module.exports={
 			}
 		});
     },
-    
+    getAllDonateById : function(id, callback){
+
+		var sql = "select * from donatebook where id=?";
+		db.getResults(sql, [id], function(result){
+			//console.log(result);
+			if(result.length > 0 ){
+				callback(result[0]);
+			}else{
+				callback([]);
+			}
+		});
+    },
 	getByEmail: function(email, callback){
 		var sql = "select * from book where email=?";
 		db.getResults(sql, [email], function(result){
@@ -80,6 +91,18 @@ module.exports={
 			}
 		});
 	},
+	getAllCompletedOrder : function(callback){
+		var sql = "select * from completeorders";
+
+		db.getResults(sql, [], function(results){
+
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
 	getAllOrder : function(callback){
 		var sql = "select * from bookorder";
 
@@ -96,6 +119,17 @@ module.exports={
 		var sql = "select * from donatebook";
 
 		db.getResults(sql, [], function(results){
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	getAllDonateByEmail : function(email, callback){
+		var sql = "select * from donatebook where email !=?";
+
+		db.getResults(sql, [email], function(results){
 
 			if(results.length > 0 ) {
 				callback(results);
@@ -134,6 +168,16 @@ module.exports={
 
 		db.getResults(sql, [email], function(results){
 
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	getOrderById : function(id, callback){
+		var sql = "select * from bookorder where id=?";
+		db.getResults(sql, [id], function(results){
 			if(results.length > 0 ) {
 				callback(results);
 			}else{
@@ -185,12 +229,36 @@ module.exports={
 			callback(status);
 		});
 	},
+	insertCompletedOrder : function(order, callback){
+		var sql = "insert into completeorders values('', ?, ?, ?, ?, ?, ?, ?, ?)";
+		db.execute(sql, [order.id, order.bid, order.bname, order.aname, order.category, order.price, order.bemail, order.semail], function(status){
+			callback(status);
+		});
+	},
 	update : function(book, callback){
 		var sql = "update book set bname=?, aname=?, category=?, price=? where id=?";		
 			db.execute(sql, [book.bname, book.aname, book.category, book.price, book.id], function(status){
 				callback(status);
 			});
 		
+	},
+	deleteOrderedBook : function(id, callback){
+		var sql = "DELETE FROM book WHERE id=?"
+		db.execute(sql, [id], function(status){
+			callback(status);
+		});
+	},
+	deleteOrderedDonateBook : function(id, callback){
+		var sql = "DELETE FROM donatebook WHERE id=?"
+		db.execute(sql, [id], function(status){
+			callback(status);
+		});
+	},
+	deleteOrder : function(id, callback){
+		var sql = "DELETE FROM bookorder WHERE id=?"
+		db.execute(sql, [id], function(status){
+			callback(status);
+		});
 	},
 	delete : function(user, callback){
 		//var sql = "insert into user values('','"+ user.username+"', '"+user.password+"')";

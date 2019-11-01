@@ -30,8 +30,34 @@ router.get('/order', function(req, res){
 		res.render('admin/order', {order: results});	
 	});	
 });
+router.get('/order/:id', function(req, res){
+	var id = req.params.id;
+	bookModel.getOrderById(id, function(result){
+		var order = result[0];
+		var oid = result[0].id;
+		console.log(order);
+		bookModel.insertCompletedOrder(order, function(status){
+			if(status){
+				bookModel.deleteOrder(oid, function(status){
+					if(status){
+						res.redirect('/admin/order');
+						/* bookModel.getAllOrder(function(results){
+							res.render('admin/order', {order: results});	
+						}); */	
+					}else{
+						res.send("Donot delete");
+					}
+				});	
+			}else{
+				res.redirect('/admin');
+			}
+		});
+	});
+});
 router.get('/orderhistory', function(req, res){
-	res.render('admin/orderhistory');		
+	bookModel.getAllCompletedOrder(function(results){
+		res.render('admin/orderhistory', {order: results});
+	});	
 });
 router.get('/donate', function(req, res){
 	bookModel.getAllDonate(function(results){

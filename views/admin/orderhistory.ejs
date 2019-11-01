@@ -42,7 +42,7 @@
 </head>
 <body>
 	<br>
-	<p style="text-align: center; padding-top: 0px; font-size: 30px;"><strong>All Post</strong></p>
+	<p style="text-align: center; padding-top: 0px; font-size: 30px;"><strong>All Completed Orders</strong></p>
 	<div class="header1">
 			<a class="btn" id="abc"href="/admin"><i class="fa fa-home"></i></a> |
 			<a href="/admin/post" class="btn btn-success">All Post</a> |
@@ -57,6 +57,7 @@
 		<table border="1" class="table table-striped"> 
 			<tr>
 				<th>Order ID</th>
+				<th>Book ID</th>
 				<th>Book Name</th>
 				<th>Author Name</th>
 				<th>Category No</th>
@@ -64,7 +65,18 @@
 				<th>Buyer Email</th>
 				<th>Seller Email</th>
 			</tr>
-			
+			<% for(var i=0; i< order.length; i++){ %>
+				<tr>
+					<td><%= order[i].orderid %></td>
+					<td><%= order[i].bid %></td>
+					<td><%= order[i].bname %></td>
+					<td><%= order[i].aname %></td>
+					<td><%= order[i].category %></td>
+					<td><%= order[i].price %></td>
+					<td><%= order[i].bemail %></td>
+					<td><%= order[i].semail %></td>
+				</tr>
+			<% } %>
 		</table>
 	</div>
 </body>

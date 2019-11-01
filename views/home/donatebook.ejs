@@ -74,29 +74,7 @@
         font-weight: bold;
         color: #fff;
         text-decoration: none;
-    }  
-    .footer{
-        margin-top: 50px;
-        background: rgb(53, 52, 52);
-        color: #fff;
-    }
-    .footer h1{
-        font-size: 20px;
-        margin: 25px 0;
-    }
-    .footer p{
-        font-size: 12px;
-    }
-    .copy-right{
-        margin-bottom: -80px;
-        text-align: center;
-        font-size: 15px;
-        padding-bottom: 20px;
-    }
-    .footer hr{
-        margin-top: 10px;
-        background-color: #ccc;
-    }   
+    }     
         </style>
     </head>  
     <body>
@@ -109,7 +87,7 @@
                 </div>
                 <div class="menu-bar">
                     <ul>
-                        <li><a href="/home/requestbook">Request Book</a></li>
+                        <li><a href="/home">Home</a></li>
                         <li><a href="/login"><%= user.name %></a></li>
                     </ul>
                 </div>
@@ -124,49 +102,13 @@
                        <img src="/uploads/book3.jpg" class='img-responsive' width='100%' height=300%></br>
                         Name: <h7 class="text-danger"> <%= book[i].bname %></h7></br>
 						Author Name: <h7 class="text-danger"><%= book[i].aname %></h7></br>
-                        Price:  <h7 class="text-danger"><%= book[i].price %></h7></br>
-                        <a href="/home/buy/<%= book[i].id %>">Buy</a>
+                        <a href="/home/donateorder/<%= book[i].id %>">Order</a>
         			</div>
         		</div>
 			<% } %>
         
         </div>
     </div>
-    <section class="footer">
-                <div class="container text-center">
-                <div class="row">
-                    <div class="col-md-3">
-                        <h1>Useful Links</h1>
-                        <p><a href="/home/donatebook">Donated Books</a></p>
-                        <p>Privacy Policy<p>
-                        <p>Return policy</p>
-                        <p>Discount coupons</p>
-                    </div>
-                    <div class="col-md-3">
-                        <h1>Company</h1>
-                        <p>About us<p>
-                        <p>Contact us</p>
-                        <p>Career</p>
-                        <p>Affiliate</p>
-                    </div>
-                    <div class="col-md-3">
-                        <h1>Support</h1>
-                        <p>Oreder track</p>
-                        <p>Find my product</p>
-                        <p>Guide<p>
-                        <p>Help desk</p>
-                    </div>
-                    <div class="col-md-3">
-                        <h1>Follow us on</h1>
-                        <p><i class="fa fa-facebook-official"></i> Facebook<p>
-                        <p><i class="fa fa-youtube-play"></i> youtube</p>
-                        <p><i class="fa fa-linkedin"></i> Linked in</p>
-                        <p><i class="fa fa-twitter"></i> Twitter</p>
-                    </div>
-                </div>
-                <hr>
-                <p class="copy-right">  &copy ATP 3 Midterm Project</p>
-                </div>
-            </section>
+
     </body>
 </html>

@@ -70,7 +70,7 @@ router.post('/buy/:id', function(req, res){
 		res.send("Please login first");
 	}else{
 		//console.log(req.session.email);
-		//var id = req.params.id;
+		var id = req.params.id;
 		var book = {
 			id: req.params.id,
 			bname: req.body.bname,
@@ -82,9 +82,16 @@ router.post('/buy/:id', function(req, res){
 		};
 		bookModel.insertOrder(book, function(status){
 			if(status){
-				res.redirect('/user');
+				console.log(id);
+				bookModel.deleteOrderedBook(id, function(status1){
+					if(status1){
+						res.redirect('/user');
+					}else{
+						res.send("Not Ordered");
+					}
+				});
 			}else{
-				res.redirect('/buy/:id');
+				res.send("Not Ordered");
 			}
 		});
 	}
@@ -116,6 +123,82 @@ router.post('/requestbook', function(req, res, next){
 	}
 	
 });
+
+router.get('/donatebook', function(req, res){
+	if(req.session.email == null){
+		bookModel.getAllDonate(function(results){
+			var result = {
+				name: "Log in"
+			}
+			res.render('home/donatebook', {book: results, user: result});
+		});
+	}else{
+		var email = req.session.email;
+		bookModel.getAllDonateByEmail(email, function(results){
+			var result = {
+				name: "Welcome"
+			}
+			res.render('home/donatebook',{book: results, user: result});
+		});
+	}
+});
+
+router.get('/donateorder/:id', function(req, res){
+		bookModel.getAllDonateById(req.params.id, function(results){
+		//console.log(results.email);
+		res.render('home/donateorder', {book: results});		
+	});
+});
+
+router.post('/donateorder/:id', function(req, res){
+	if(req.session.email == null){
+		res.send("Please login first");
+	}else{
+		var id = req.params.id;
+		var book = {
+			id: req.params.id,
+			bname: req.body.bname,
+			aname: req.body.aname,
+			category: req.body.category,
+			price: req.body.delivery,
+			semail: req.body.semail,
+			bemail: req.session.email
+		};
+		bookModel.insertOrder(book, function(status){
+			if(status){
+				console.log(id);
+				bookModel.deleteOrderedDonateBook(id, function(status1){
+					if(status1){
+						res.redirect('/user');
+					}else{
+						res.send("Not Ordered");
+					}
+				});
+			}else{
+				res.send("Not Ordered");
+			}
+		});
+	}
+});
+
+
+/* bookModel.insertOrder(book, function(status){
+	if(status){
+		
+	}else{
+		res.send("Not Ordered");
+	}
+});
+bookModel.deleteOrderedBook(id, function(status1){
+			
+	if(status1){
+		res.send("Ordered");
+		//res.redirect('/user');
+	}else{
+		res.send("Not Ordered");
+	}
+}); */
+
 
 module.exports = router;
 
