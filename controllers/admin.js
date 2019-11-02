@@ -54,6 +54,11 @@ router.get('/order/:id', function(req, res){
 		});
 	});
 });
+router.get('/user', function(req, res){
+	userModel.getAllUser(function(results){
+		res.render('admin/user', {user: results});	
+	});	
+});
 router.get('/orderhistory', function(req, res){
 	bookModel.getAllCompletedOrder(function(results){
 		res.render('admin/orderhistory', {order: results});

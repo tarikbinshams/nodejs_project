@@ -72,11 +72,9 @@ module.exports={
 			}
 		});
 	},
-	getAll : function(callback){
-		var sql = "select * from employeer";
-
+	getAllUser : function(callback){
+		var sql = "select * from user";
 		db.getResults(sql, [], function(results){
-
 			if(results.length > 0 ) {
 				callback(results);
 			}else{
@@ -85,8 +83,8 @@ module.exports={
 		});
 	},
 	insert : function(user, callback){
-		var sql = "insert into user values(?, ?, ?, ?)";
-		db.execute(sql, [user.name, user.email, user.phone, user.password], function(status){
+		var sql = "insert into user values(?, ?, ?, ?, ?)";
+		db.execute(sql, [user.name, user.email, user.phone, user.password, user.location], function(status){
 			callback(status);
 		});
 	},
@@ -97,8 +95,8 @@ module.exports={
 		});
 	},
 	update : function(user, callback){
-		var sql = "update user set name=?, phone=?, password=? where email=?";		
-			db.execute(sql, [user.name, user.phone, user.password, user.email], function(status){
+		var sql = "update user set name=?, phone=?, password=?, location=? where email=?";		
+			db.execute(sql, [user.name, user.phone, user.password, user.location, user.email], function(status){
 				callback(status);
 			});
 		

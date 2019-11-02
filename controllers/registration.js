@@ -11,7 +11,8 @@ router.post('/', function(req, res){
 		name: req.body.name,
 		email: req.body.email,
 		phone: req.body.phone,
-		password: req.body.password
+		password: req.body.password,
+		location: req.body.location
 
 	};
 	console.log(req.body.name.length);
@@ -37,6 +38,9 @@ router.post('/', function(req, res){
 	}
 	if(req.body.password.length > 6 ){
 		res.send("Password con not be more than 6 character");
+	}
+	if(req.body.location.length > 12 ){
+		res.send("Password con not be more than 12 character");
 	}
 
 	userModel.validateEmail(req.body.email, function(result){

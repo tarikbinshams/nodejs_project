@@ -47,6 +47,7 @@
         display: inline-flex;
         width: 68%;
         float: left;
+        padding-left: 450px;
     }
 
     .fa-search{
@@ -81,9 +82,7 @@
          <div class="top-nav-bar">
             <form method="post">
                 <div class="search-box">
-                    <img src="logo.jpg" alt="" class="logo">
-                    <input type="text" name="search" placeholder="Search..." class="form-control">
-                    <span class="input-group-text"><input type="submit" value=" " class="fa fa-search"></span>
+                    <h1><strong>All Donated Books</strong> </h1>
                 </div>
                 <div class="menu-bar">
                     <ul>
@@ -99,7 +98,7 @@
     			<% for(var i=0; i< book.length; i++){ %>
 				<div class="col-md-3">
         			<div style="border:3px solid #478b47; background-color:whitesmoke; margin:10px; border-radius:5px; padding:10px;" align="center">
-                       <img src="/uploads/book3.jpg" class='img-responsive' width='100%' height=300%></br>
+                       <img src="/<%= book[i].filename %>" class='img-responsive' width='100%' height=300%></br>
                         Name: <h7 class="text-danger"> <%= book[i].bname %></h7></br>
 						Author Name: <h7 class="text-danger"><%= book[i].aname %></h7></br>
                         <a href="/home/donateorder/<%= book[i].id %>">Order</a>

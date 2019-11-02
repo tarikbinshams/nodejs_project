@@ -1,11 +1,19 @@
 var express = require('express');
 var userModel = require('./../models/user-model');
 var bookModel = require('./../models/book-model');
-//var sessionstorage = require('sessionstorage');
-//var multer = require('multer');
-//var upload = multer({dest: 'public/uploads/'});
 var router = express.Router();
+var multer = require('multer');
 
+var storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, 'uploads/');
+	},
+	filename: (req, file, cb) => {
+		cb(null, Date.now()+'-'+file.originalname);
+	}
+});
+
+var upload = multer({ storage });
 router.get('*', function(req, res, next){
 
 	if(req.session.email != null){
@@ -33,20 +41,18 @@ router.get('/', function(req, res){
 
 router.get('/profile', function(req, res){
 	var user = req.session.email;
-	//console.log(user);
 	userModel.getByEmail(user, function(result){
 		res.render('user/profile', {user: result});
-		
-		});
+	});
 		
 });
 router.post('/profile', function(req, res){
-
 	var user = {
 		email: req.session.email,
 		name: req.body.name,
 		phone: req.body.phone,
-		password: req.body.password
+		password: req.body.password,
+		location: req.body.location
 	};
 
 	userModel.update(user, function(status){
@@ -64,15 +70,17 @@ router.get('/addbook', function(req, res){
 	res.render('user/addbook');
 });
 
-router.post('/addbook', function(req, res, next){
+router.post('/addbook', upload.single('img'), function(req, res, next){
 	//res.send(req.files);
 	var cat = req.body.category;
+	var filename1 = req.file.filename;
 	var book = {
 		bname: req.body.bname,
 		aname: req.body.aname,
 		category: cat,
 		price: req.body.price,
-		email: req.session.email
+		email: req.session.email,
+		filename: filename1
 	};
 	var numbers = /^[-+]?[0-9]+$/;
       if(!(req.body.price.match(numbers)))
@@ -93,14 +101,16 @@ router.get('/donatebook', function(req, res){
 	res.render('user/donatebook');
 });
 
-router.post('/donatebook', function(req, res, next){
+router.post('/donatebook', upload.single('img'), function(req, res, next){
 	//res.send(req.files);
 	var cat = req.body.category;
+	var filename1 = req.file.filename;
 	var book = {
 		bname: req.body.bname,
 		aname: req.body.aname,
 		category: cat,
-		email: req.session.email
+		email: req.session.email,
+		filename: filename1
 	};
 	//console.log(user.email);
 	bookModel.insertDonateBook(book, function(status){
@@ -111,7 +121,12 @@ router.post('/donatebook', function(req, res, next){
 		}
 	});
 });
-
+router.get('/mydonate', function(req, res){
+	bookModel.getAllDonateByEmail1(req.session.email, function(results){
+		res.render('user/mydonate', {book: results});
+	})
+	
+});
 router.get('/edit/:id', function(req, res){
 
 	//res.render('user/edit');

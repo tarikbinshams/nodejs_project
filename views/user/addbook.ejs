@@ -41,7 +41,7 @@ a{
 
     <body>
         <div class="form-wrap">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <h1>Add Book</h1>
                 <input type="text" placeholder="Book Name" name="bname" required="required">
                 <input type="text" placeholder="Author Name" name="aname" required="required">
@@ -56,7 +56,7 @@ a{
                     <option value="Islamic">Islamic</option>
                 </select>
                 <input type="text" placeholder="Price" name="price" required="required">
-                <input type="file" placeholder="Upload image" name="image">
+                <input type="file" placeholder="Upload image" name="img">
                 <input type="submit" value="Add" name="submit">
 
                 <a href="/user">Back</a>

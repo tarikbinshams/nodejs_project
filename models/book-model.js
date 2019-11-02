@@ -80,7 +80,7 @@ module.exports={
 		});
 	},
 	getAll : function(callback){
-		var sql = "select * from book";
+		var sql = "select * from book order by id desc";
 
 		db.getResults(sql, [], function(results){
 
@@ -129,6 +129,17 @@ module.exports={
 	getAllDonateByEmail : function(email, callback){
 		var sql = "select * from donatebook where email !=?";
 
+		db.getResults(sql, [email], function(results){
+
+			if(results.length > 0 ) {
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	getAllDonateByEmail1 : function(email, callback){
+		var sql = "select * from donatebook where email=?";
 		db.getResults(sql, [email], function(results){
 
 			if(results.length > 0 ) {
@@ -206,14 +217,14 @@ module.exports={
 		});
 	},
 	insertBook : function(book, callback){
-		var sql = "insert into book values('', ?, ?, ?, ?, ?)";
-		db.execute(sql, [book.bname, book.aname, book.category, book.price, book.email], function(status){
+		var sql = "insert into book values('', ?, ?, ?, ?, ?, ?)";
+		db.execute(sql, [book.bname, book.aname, book.category, book.price, book.email, book.filename], function(status){
 			callback(status);
 		});
 	},
 	insertDonateBook : function(book, callback){
-		var sql = "insert into donatebook values('', ?, ?, ?, ?)";
-		db.execute(sql, [book.bname, book.aname, book.category, book.email], function(status){
+		var sql = "insert into donatebook values('', ?, ?, ?, ?, ?)";
+		db.execute(sql, [book.bname, book.aname, book.category, book.email, book.filename], function(status){
 			callback(status);
 		});
 	},

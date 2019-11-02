@@ -5,7 +5,7 @@ router.get('/', function(req, res){
 
 	req.session.email = null;
 	req.session.username = null;
-	res.redirect('/login');
+	res.redirect('/home');
 });
 
 module.exports = router;

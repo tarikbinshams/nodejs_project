@@ -15,7 +15,7 @@ var app 		= express();
 app.set('view engine', 'ejs');
 
 //MIDDLEWARE
-app.use(express.static('public'));
+app.use(express.static('uploads'));
 app.use(bodyParse.urlencoded({extended:false}));
 app.use(exSession({secret:"i love js", saveUninitialized:true, resave:false}));
 app.use('/home', home);
