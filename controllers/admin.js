@@ -82,13 +82,34 @@ router.post('/addadmin', function(req, res){
 		username: req.body.username,
 		password: req.body.password
 	}
-	userModel.insertAdmin(admin, function(status){
-		if(status){
-			res.render('admin/index');
-		}else{
-			res.send("Error");
-		}	
-	});		
+	if(req.body.username == ""){
+		res.send("Usernameame con not be empty!");
+	}
+	if(req.body.username.length > 6){
+		res.send("Username can not be more than 6 character long.");
+	}
+	if(req.body.password == ""){
+		res.send("Password con not be empty!");
+	}
+	if(req.body.password.length > 6){
+		res.send("Password can not be more than 6 character long.");
+	}
+
+	userModel.validateUserName(req.body.username, function(result){
+		if(result.length > 0){
+			res.send("This username is already registered.");
+		}
+		else{
+			userModel.insertAdmin(admin, function(result){
+				if(result.length > 0){
+					res.send("Error");
+				}else{
+					res.render('admin/index');
+				}	
+			});	
+		} 
+		
+	});	
 });
 
 

@@ -43,8 +43,8 @@ a{
         <div class="form-wrap">
             <form method="post">
                 <h1>Modify Book</h1>
-                <input type="text" value="<%=book.bname%>" name="bname">
-                <input type="text" value="<%=book.aname%>" name="aname">
+                <input type="text" value="<%=book.bname%>" name="bname" required="required">
+                <input type="text" value="<%=book.aname%>" name="aname" required="required">
                 <select name="category">
                     <option value="Programming">Programming</option>
                     <option value="Math">Math</option>
@@ -55,7 +55,7 @@ a{
                     <option value="Medical">Medical</option>
                     <option value="Islamic">Islamic</option>
                 </select>
-                <input type="text" value="<%=book.price%>" name="price">
+                <input type="text" value="<%=book.price%>" name="price" required="required">
                 <input type="submit" value="Modify" name="submit">
 
                 <a href="/user">Back</a>

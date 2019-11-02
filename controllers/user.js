@@ -74,15 +74,19 @@ router.post('/addbook', function(req, res, next){
 		price: req.body.price,
 		email: req.session.email
 	};
-	//console.log(book.email);
-	bookModel.insertBook(book, function(status){
-		if(status){
-			res.redirect('/user');
-		}else{
-			res.send("Not Inserted");
-			//res.redirect('/user/addbook');
-		}
-	});
+	var numbers = /^[-+]?[0-9]+$/;
+      if(!(req.body.price.match(numbers)))
+      {
+		  res.send("Enter a valid price");
+	  }else{
+		bookModel.insertBook(book, function(status){
+			if(status){
+				res.redirect('/user');
+			}else{
+				res.send("Not Inserted");
+			}
+		});
+	  }
 });
 
 router.get('/donatebook', function(req, res){
@@ -126,7 +130,11 @@ router.post('/edit/:id', function(req, res){
 		category: req.body.category,
 		price: req.body.price
 	};
-
+	var numbers = /^[-+]?[0-9]+$/;
+      if(!(req.body.price.match(numbers)))
+      {
+		  res.send("Enter a valid price");
+	  }
 	bookModel.update(book, function(status){
 		if(status){
 			res.redirect('/user');

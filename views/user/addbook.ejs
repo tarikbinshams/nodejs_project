@@ -43,8 +43,8 @@ a{
         <div class="form-wrap">
             <form method="post">
                 <h1>Add Book</h1>
-                <input type="text" placeholder="Book Name" name="bname">
-                <input type="text" placeholder="Author Name" name="aname">
+                <input type="text" placeholder="Book Name" name="bname" required="required">
+                <input type="text" placeholder="Author Name" name="aname" required="required">
                 <select name="category">
                     <option value="Programming">Programming</option>
                     <option value="Math">Math</option>
@@ -55,7 +55,7 @@ a{
                     <option value="Medical">Medical</option>
                     <option value="Islamic">Islamic</option>
                 </select>
-                <input type="text" placeholder="Price" name="price">
+                <input type="text" placeholder="Price" name="price" required="required">
                 <input type="file" placeholder="Upload image" name="image">
                 <input type="submit" value="Add" name="submit">
 

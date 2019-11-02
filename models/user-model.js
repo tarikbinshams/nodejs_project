@@ -38,6 +38,16 @@ module.exports={
 			}
 		});
 	},
+	validateEmail : function(email, callback){
+		var sql = "select * from user where email=?";
+		db.getResults(sql, [email], function(result){
+			if(result.length > 0 ) {
+				callback(result);
+			}else{
+				callback([]);
+			}
+		});
+	},
 	validateAdmin : function(user, callback){
 		var sql = "select * from admin where username=? and password=?";
 
@@ -47,6 +57,18 @@ module.exports={
 				callback(true);
 			}else{
 				callback(false);
+			}
+		});
+	},
+	validateUserName : function(username, callback){
+		var sql = "select * from admin where username=?";
+
+		db.getResults(sql, [username], function(result){
+
+			if(result.length > 0 ) {
+				callback(result);
+			}else{
+				callback([]);
 			}
 		});
 	},
